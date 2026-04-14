@@ -12,3 +12,10 @@ Hybrid quantum-classical optimization framework for oil reservoir well placement
 ## Installation
 ```bash
 pip install -r requirements.txt
+## Results Visualization
+
+### Well Selection Optimization
+![Well Selection](results_plot.png)
+
+### Production Analysis
+![Production](production_scatter.png)
