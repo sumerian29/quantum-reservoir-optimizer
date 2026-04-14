@@ -4,6 +4,15 @@ pandas
 matplotlib
 scikit-learn
 pyyaml
-qiskit
+qiskit==0.45.0
+qiskit-optimization==0.6.0
+qiskit-ibm-runtime==0.15.0
 torch
-qiskit-optimization
+xgboost
+plotly
+streamlit
+fastapi
+uvicorn
+pydantic
+joblib
+pytest
