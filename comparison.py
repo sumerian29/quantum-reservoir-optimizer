@@ -8,8 +8,7 @@ from src.qubo_builder import QUBOBuilder
 from src.classical.simulated_annealing import simulated_annealing
 from src.classical.exact_solver import exact_solver
 from src.classical.random_baseline import random_baseline
-from src.classical.qaoa_solver import qaoa_solver
-
+from src.quantum.qaoa_solver import qaoa_solver
 
 def evaluate_solution(x, Q, production, interference):
     energy = float(x @ Q @ x)
