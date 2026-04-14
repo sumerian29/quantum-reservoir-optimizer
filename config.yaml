@@ -1,0 +1,6 @@
+n_wells: 10
+p: 2
+use_surrogate: true
+classical_method: "SA"
+quantum_backend: "qasm_simulator"
+shots: 8192

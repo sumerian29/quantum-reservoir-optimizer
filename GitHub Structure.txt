@@ -1,0 +1,10 @@
+quantum-reservoir-optimization/
+│
+├── data/
+├── classical_model/
+├── quantum_qaoa/
+├── qubo_builder.py
+├── optimization.py
+├── results/
+├── notebooks/
+└── README.md

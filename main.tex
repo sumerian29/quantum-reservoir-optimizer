@@ -1,0 +1,182 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\journal{Applied Energy / Energy AI}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Scalable Hybrid Quantum-Classical Optimization for Oil Reservoir Well Placement Using QUBO and QAOA}
+
+\author{Tareq Mageed Al-Karimi}
+\address{Ministry of Oil — Iraq}
+
+\begin{abstract}
+This paper presents a hybrid quantum-classical framework for optimizing oil reservoir well placement using Quadratic Unconstrained Binary Optimization (QUBO) and the Quantum Approximate Optimization Algorithm (QAOA). The problem is formulated to incorporate production maximization and interference minimization. Classical solvers are compared against QAOA. Results show comparable solution quality across methods for small-scale problems, with higher computational cost for QAOA. Scalability analysis highlights the potential of quantum optimization for large-scale reservoir problems.
+\end{abstract}
+
+\begin{keyword}
+QUBO \sep QAOA \sep Oil Reservoir Optimization \sep Quantum Computing \sep Well Placement
+\end{keyword}
+
+\end{frontmatter}
+
+% =============================
+\section{Introduction}
+
+Optimizing well placement in oil reservoirs is a combinatorial optimization problem with significant economic impact. The problem is inherently NP-hard due to exponential growth in possible configurations.
+
+Traditional methods rely on heuristics or simulation-based approaches, which may struggle with scalability. Recent advances in quantum computing introduce new optimization techniques such as QAOA.
+
+This work proposes a hybrid quantum-classical framework for solving the well placement problem using QUBO formulation and QAOA.
+
+% =============================
+\section{Problem Formulation}
+
+The optimization problem is formulated as:
+
+\begin{equation}
+\min_{x \in \{0,1\}^n} x^T Q x
+\end{equation}
+
+where $x$ is a binary decision vector and $Q$ is the QUBO matrix.
+
+\subsection{Objective Components}
+
+\begin{itemize}
+\item Production maximization
+\item Interference minimization
+\end{itemize}
+
+The QUBO matrix is defined as:
+
+\begin{equation}
+Q = -P + \lambda I
+\end{equation}
+
+where $P$ represents production and $I$ represents interference penalties.
+
+% =============================
+\section{Methodology}
+
+\subsection{Data Generation}
+
+Synthetic reservoir properties are generated including porosity, permeability, pressure, and distance.
+
+\subsection{QUBO Construction}
+
+The QUBO matrix encodes production (diagonal terms) and interference (off-diagonal terms).
+
+\subsection{Classical Solvers}
+
+\begin{itemize}
+\item Exact Solver (Exhaustive search)
+\item Simulated Annealing (SA)
+\end{itemize}
+
+\subsection{Quantum Solver}
+
+QAOA is implemented using Qiskit with classical optimization (COBYLA).
+
+% =============================
+\section{Experimental Setup}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+Parameter & Value \\
+\midrule
+Number of wells & 6, 8, 10 \\
+Runs & 10 \\
+QAOA layers & 2 \\
+Optimizer & COBYLA \\
+\bottomrule
+\end{tabular}
+\caption{Experimental configuration}
+\end{table}
+
+% =============================
+\section{Results}
+
+\subsection{Objective Energy}
+
+All solvers achieve similar objective energy values, indicating consistent optimization performance.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{results_plot.png}
+\caption{Well selection optimization}
+\end{figure}
+
+\subsection{Production}
+
+Production results are nearly identical across all methods.
+
+\subsection{Interference}
+
+Interference penalties remain consistent across solvers.
+
+\subsection{Runtime}
+
+QAOA shows higher runtime due to variational optimization overhead.
+
+% =============================
+\section{Optimality Gap}
+
+The gap is defined as:
+
+\begin{equation}
+\text{Gap} = E_{\text{method}} - E_{\text{optimal}}
+\end{equation}
+
+Results show negligible gap for all methods.
+
+% =============================
+\section{Scalability Analysis}
+
+\subsection{Exact Solver}
+
+\begin{equation}
+O(2^n)
+\end{equation}
+
+\subsection{Simulated Annealing}
+
+\begin{equation}
+O(n \cdot k)
+\end{equation}
+
+\subsection{QAOA}
+
+\begin{equation}
+O(p \cdot C_{\text{circuit}})
+\end{equation}
+
+Exact methods become infeasible for large $n$, while QAOA remains scalable.
+
+% =============================
+\section{Discussion}
+
+QAOA achieves comparable solution quality but at higher computational cost. No quantum advantage is observed for small-scale problems, but scalability suggests potential for larger systems.
+
+% =============================
+\section{Conclusion}
+
+A hybrid quantum-classical framework for well placement optimization was developed. QAOA matches classical methods in solution quality, with scalability advantages for future large-scale applications.
+
+Future work includes real reservoir data and quantum hardware implementation.
+
+% =============================
+\section*{Acknowledgment}
+
+The author acknowledges the Ministry of Oil — Iraq for support.
+
+% =============================
+\end{document}
