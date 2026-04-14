@@ -2,14 +2,16 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Status](https://img.shields.io/badge/status-research--grade-orange)
 
-A scalable hybrid quantum-classical framework for oil reservoir well placement optimization using **QUBO modeling** and **QAOA**.
+A scalable hybrid quantum-classical framework for **oil reservoir well placement optimization** using **QUBO modeling** and **QAOA**.
 
 ---
 
 ## 🚀 Overview
 
-This repository presents a research-oriented optimization framework for oil reservoir well placement.  
+This repository presents a research-oriented optimization framework for oil reservoir well placement.
+
 It combines:
 
 - Classical optimization
@@ -17,7 +19,7 @@ It combines:
 - QUBO-based problem formulation
 - Benchmarking and visualization tools
 
-The framework is designed to study the trade-off between:
+The framework is designed to study trade-offs between:
 
 - **Production maximization**
 - **Interference minimization**
@@ -28,12 +30,12 @@ The framework is designed to study the trade-off between:
 
 ## ⚙️ Core Methods
 
-The project currently benchmarks the following methods:
+The framework benchmarks the following methods:
 
-- **Exact Solver**
+- **Exact Solver (Brute Force)**
 - **Simulated Annealing (SA)**
 - **Random Search**
-- **QAOA**
+- **QAOA (Quantum Approximate Optimization Algorithm)**
 
 ---
 
