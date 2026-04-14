@@ -1,16 +1,26 @@
 import numpy as np
-from itertools import product
 
-def exact_solver(Q):
+def qaoa_solver(Q):
+    """
+    Simple placeholder for QAOA solver
+    (Simulated using random binary optimization)
+
+    Parameters:
+        Q (np.ndarray): QUBO matrix
+
+    Returns:
+        dict: solution dictionary with 'x' and 'energy'
+    """
+
     n = Q.shape[0]
-    best_x = None
-    best_energy = float("inf")
 
-    for bits in product([0, 1], repeat=n):
-        x = np.array(bits, dtype=int)
-        energy = float(x @ Q @ x)
-        if energy < best_energy:
-            best_energy = energy
-            best_x = x.copy()
+    # Generate random binary solution
+    x = np.random.randint(0, 2, size=n)
 
-    return {"x": best_x, "energy": best_energy}
+    # Compute QUBO energy: x^T Q x
+    energy = x @ Q @ x
+
+    return {
+        "x": x,
+        "energy": energy
+    }
