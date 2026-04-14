@@ -8,6 +8,7 @@ from src.qubo_builder import QUBOBuilder
 from src.classical.simulated_annealing import simulated_annealing
 from src.classical.exact_solver import exact_solver
 from src.classical.random_baseline import random_baseline
+from src.classical.qaoa_solver import qaoa_solver
 
 
 def evaluate_solution(x, Q, production, interference):
@@ -34,6 +35,7 @@ def run_single_experiment(n_wells=10, seed=42):
         "Random": lambda: random_baseline(Q, trials=1000),
         "SA": lambda: simulated_annealing(Q, max_iter=2000),
         "Exact": lambda: exact_solver(Q),
+        "QAOA": lambda: qaoa_solver(Q, reps=2, maxiter=80),
     }
 
     for method_name, solver in methods.items():
@@ -67,7 +69,7 @@ def run_benchmark():
     all_results = []
 
     for n_wells in [6, 8, 10]:
-        for seed in range(10):
+        for seed in range(5):
             all_results.extend(
                 run_single_experiment(n_wells=n_wells, seed=seed)
             )
@@ -99,15 +101,15 @@ def run_benchmark():
 
 
 def plot_metric(summary, metric, ylabel, filename, lower_is_better=False):
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(9, 5))
 
     methods = summary["method"].unique()
     n_values = sorted(summary["n_wells"].unique())
 
     x = np.arange(len(n_values))
-    width = 0.25
+    width = 0.18
 
-    offsets = np.linspace(-width, width, len(methods))
+    offsets = np.linspace(-(len(methods)-1)/2*width, (len(methods)-1)/2*width, len(methods))
 
     for i, method in enumerate(methods):
         subset = summary[summary["method"] == method].sort_values("n_wells")
