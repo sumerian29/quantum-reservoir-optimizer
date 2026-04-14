@@ -1,26 +1,43 @@
 import numpy as np
 
-def qaoa_solver(Q):
+def qaoa_solver(Q, reps=2, maxiter=80):
     """
-    Simple placeholder for QAOA solver
-    (Simulated using random binary optimization)
+    Placeholder QAOA-like solver.
 
-    Parameters:
-        Q (np.ndarray): QUBO matrix
+    Parameters
+    ----------
+    Q : np.ndarray
+        QUBO matrix.
+    reps : int
+        Placeholder parameter for QAOA depth.
+    maxiter : int
+        Placeholder parameter for optimizer iterations.
 
-    Returns:
-        dict: solution dictionary with 'x' and 'energy'
+    Returns
+    -------
+    dict
+        Dictionary with:
+        - x: binary solution vector
+        - energy: QUBO objective value
     """
-
     n = Q.shape[0]
 
-    # Generate random binary solution
-    x = np.random.randint(0, 2, size=n)
+    rng = np.random.default_rng(42)
 
-    # Compute QUBO energy: x^T Q x
-    energy = x @ Q @ x
+    best_x = None
+    best_energy = float("inf")
+
+    # Simulate a quantum-inspired search:
+    # use maxiter as the number of candidate trials
+    for _ in range(maxiter):
+        x = rng.integers(0, 2, size=n)
+        energy = float(x @ Q @ x)
+
+        if energy < best_energy:
+            best_energy = energy
+            best_x = x.copy()
 
     return {
-        "x": x,
-        "energy": energy
+        "x": best_x,
+        "energy": best_energy
     }
