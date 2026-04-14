@@ -1,61 +1,60 @@
 # 🧠 Quantum Reservoir Optimizer
 
-![Python](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.10+-blue)
 
-Hybrid Quantum-Classical Optimization for Oil Reservoir Well Placement using QUBO and QAOA.
+A scalable hybrid quantum-classical framework for oil reservoir well placement optimization using **QUBO modeling** and **QAOA**.
 
 ---
 
 ## 🚀 Overview
 
-This project implements a hybrid optimization framework combining classical and quantum methods to solve oil reservoir well placement problems.
+This repository presents a research-oriented optimization framework for oil reservoir well placement.  
+It combines:
+
+- Classical optimization
+- Quantum-inspired / quantum optimization
+- QUBO-based problem formulation
+- Benchmarking and visualization tools
+
+The framework is designed to study the trade-off between:
+
+- **Production maximization**
+- **Interference minimization**
+- **Runtime efficiency**
+- **Scalability**
 
 ---
 
-## ⚙️ Problem
+## ⚙️ Core Methods
 
-We aim to select optimal wells while:
+The project currently benchmarks the following methods:
 
-- Maximizing production
-- Minimizing interference
-
-This is formulated as a:
-
-> Quadratic Unconstrained Binary Optimization (QUBO)
+- **Exact Solver**
+- **Simulated Annealing (SA)**
+- **Random Search**
+- **QAOA**
 
 ---
 
-## 🧪 Methods
+## 📂 Repository Structure
 
-| Method | Type |
-|--------|------|
-| Exact | Optimal |
-| SA | Classical |
-| Random | Baseline |
-| QAOA | Quantum |
-
----
-
-## 📊 Results
-
-### Energy Comparison
-![Energy](results/energy_comparison.png)
-
-### Production
-![Production](results/production_comparison.png)
-
-### Runtime
-![Runtime](results/runtime_comparison.png)
-
----
-
-## ⚡ Key Insights
-
-- QAOA matches classical performance for small-scale problems
-- Exact solver is not scalable
-- Quantum advantage may appear at larger scales
-
----
-
-## 🧱 Project Structure
+```text
+quantum-reservoir-optimizer/
+│
+├── docs/
+├── examples/
+├── notebooks/
+├── results/
+├── src/
+│   ├── classical/
+│   ├── quantum/
+│   ├── utils/
+│   └── qubo_builder.py
+│
+├── comparison.py
+├── config.yaml
+├── main.py
+├── requirements.txt
+├── README.md
+└── LICENSE
