@@ -1,0 +1,20 @@
+LaTeX Assets Report
+===================
+
+Summary CSV used: comparison_summary.csv
+
+Figures used:
+  Energy:        energy_comparison.png
+  Production:    production_comparison.png
+  Interference:  interference_comparison.png
+  Runtime:       runtime_comparison.png
+
+Generated files:
+  table1.tex
+  figures_block.tex
+  latex_assets_report.txt
+
+How to use in LaTeX:
+  1) Put \usepackage{booktabs} and \usepackage{float} in the preamble.
+  2) Insert the table using: \input{table1.tex}
+  3) Insert the figures using: \input{figures_block.tex}

@@ -1,182 +1,252 @@
-\documentclass[preprint,12pt]{elsarticle}
+\documentclass[12pt,a4paper]{article}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{geometry}
 \usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{titlesec}
 
-\journal{Applied Energy / Energy AI}
+\geometry{margin=1in}
+\onehalfspacing
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+\title{Scalable Hybrid Quantum-Classical Framework for Oil Reservoir Optimization via QUBO Modeling and QAOA}
+\author{Tareq M. Al-Karimi\\Ministry of Oil -- Iraq}
+\date{\today}
 
 \begin{document}
 
-\begin{frontmatter}
-
-\title{Scalable Hybrid Quantum-Classical Optimization for Oil Reservoir Well Placement Using QUBO and QAOA}
-
-\author{Tareq Mageed Al-Karimi}
-\address{Ministry of Oil — Iraq}
+\maketitle
 
 \begin{abstract}
-This paper presents a hybrid quantum-classical framework for optimizing oil reservoir well placement using Quadratic Unconstrained Binary Optimization (QUBO) and the Quantum Approximate Optimization Algorithm (QAOA). The problem is formulated to incorporate production maximization and interference minimization. Classical solvers are compared against QAOA. Results show comparable solution quality across methods for small-scale problems, with higher computational cost for QAOA. Scalability analysis highlights the potential of quantum optimization for large-scale reservoir problems.
+Oil reservoir well placement optimization is a challenging combinatorial problem that directly affects production performance, capital efficiency, and project value. This work presents a scalable hybrid quantum-classical framework for well placement optimization based on Quadratic Unconstrained Binary Optimization (QUBO) modeling and the Quantum Approximate Optimization Algorithm (QAOA). The proposed workflow integrates simplified reservoir physics, economic drivers, and interference penalties into a binary optimization structure suitable for both quantum and classical solvers. A prototype three-well QAOA case is first used to demonstrate binary decision extraction. The framework is then benchmarked against exact optimization, random search, and simulated annealing for candidate well sets of size \(N=6,8,10\). Performance is assessed using objective energy, production, interference penalty, and runtime. The results show that the proposed formulation is reproducible, interpretable, and suitable for research-oriented reservoir optimization studies, while also providing a practical basis for future expansion to larger field-scale datasets.
 \end{abstract}
 
-\begin{keyword}
-QUBO \sep QAOA \sep Oil Reservoir Optimization \sep Quantum Computing \sep Well Placement
-\end{keyword}
-
-\end{frontmatter}
-
-% =============================
 \section{Introduction}
 
-Optimizing well placement in oil reservoirs is a combinatorial optimization problem with significant economic impact. The problem is inherently NP-hard due to exponential growth in possible configurations.
+Well placement is one of the most influential decisions in reservoir development planning. The selection of candidate wells affects expected production, development cost, inter-well interaction, and overall project economics. In practical field settings, the search space grows rapidly as the number of candidate locations increases, making the optimization problem combinatorial in nature.
 
-Traditional methods rely on heuristics or simulation-based approaches, which may struggle with scalability. Recent advances in quantum computing introduce new optimization techniques such as QAOA.
+Classical optimization techniques remain widely used in reservoir engineering, including exhaustive search, heuristic search, and metaheuristic approaches. However, the binary structure of well selection also makes the problem a natural candidate for formulation as a Quadratic Unconstrained Binary Optimization (QUBO) model. Once expressed in QUBO form, the decision problem can be solved using either classical methods or quantum-inspired and quantum algorithms.
 
-This work proposes a hybrid quantum-classical framework for solving the well placement problem using QUBO formulation and QAOA.
+Among quantum optimization methods, the Quantum Approximate Optimization Algorithm (QAOA) provides a variational framework for approximately solving binary optimization problems represented by Ising Hamiltonians. Although current quantum hardware remains limited in scale and noise performance, QAOA is still highly relevant as a research tool for testing hybrid optimization workflows and structured binary decision models.
 
-% =============================
+The objective of this study is to develop a compact but complete hybrid quantum-classical framework for oil reservoir optimization using QUBO modeling and QAOA. The work focuses on three goals:
+\begin{enumerate}
+    \item constructing a physically and economically meaningful QUBO representation of the well placement problem,
+    \item extracting a valid binary drilling decision using QAOA,
+    \item benchmarking the formulation against classical optimization methods across multiple candidate well counts.
+\end{enumerate}
+
+The resulting framework is intended as a reproducible research prototype that can later be extended toward more realistic reservoir models and larger-scale optimization studies.
+
 \section{Problem Formulation}
 
-The optimization problem is formulated as:
+Consider a reservoir development problem with \(N\) candidate well locations. Each candidate well is associated with a binary decision variable:
+\[
+x_i \in \{0,1\}, \quad i = 1,2,\dots,N
+\]
+where \(x_i=1\) indicates that well \(i\) is selected, and \(x_i=0\) indicates that it is excluded.
 
-\begin{equation}
-\min_{x \in \{0,1\}^n} x^T Q x
-\end{equation}
-
-where $x$ is a binary decision vector and $Q$ is the QUBO matrix.
-
-\subsection{Objective Components}
-
+The design objective is to select wells that maximize project benefit while reducing unfavorable inter-well interaction. In simplified form, the optimization balances:
 \begin{itemize}
-\item Production maximization
-\item Interference minimization
+    \item production contribution,
+    \item economic benefit,
+    \item interference penalty between nearby wells.
 \end{itemize}
 
-The QUBO matrix is defined as:
+This can be represented as:
+\[
+\max \left( \sum_{i=1}^{N} P_i x_i - \lambda \sum_{i<j} I_{ij} x_i x_j \right)
+\]
+where:
+\begin{itemize}
+    \item \(P_i\) is the contribution associated with selecting well \(i\),
+    \item \(I_{ij}\) is the interference penalty between wells \(i\) and \(j\),
+    \item \(\lambda\) is a penalty scaling factor.
+\end{itemize}
 
-\begin{equation}
-Q = -P + \lambda I
-\end{equation}
+For compatibility with quantum optimization routines, the problem is converted into the standard QUBO minimization form:
+\[
+\min \; x^T Q x
+\]
+where \(Q\) is the QUBO matrix and \(x\) is the binary well-selection vector.
 
-where $P$ represents production and $I$ represents interference penalties.
-
-% =============================
 \section{Methodology}
 
-\subsection{Data Generation}
+\subsection{Framework Structure}
 
-Synthetic reservoir properties are generated including porosity, permeability, pressure, and distance.
-
-\subsection{QUBO Construction}
-
-The QUBO matrix encodes production (diagonal terms) and interference (off-diagonal terms).
-
-\subsection{Classical Solvers}
-
+The project was implemented as a hybrid quantum-classical workflow containing:
 \begin{itemize}
-\item Exact Solver (Exhaustive search)
-\item Simulated Annealing (SA)
+    \item QUBO construction from reservoir and economic inputs,
+    \item conversion of the QUBO matrix into Ising form,
+    \item solution using QAOA,
+    \item classical benchmarking using exact optimization, random search, and simulated annealing,
+    \item export of tabulated results and figure-ready outputs.
 \end{itemize}
 
-\subsection{Quantum Solver}
+The implementation produces both engineering-oriented outputs and research-oriented benchmarking artifacts, including CSV files and LaTeX-compatible tables and figures.
 
-QAOA is implemented using Qiskit with classical optimization (COBYLA).
+\subsection{Prototype QAOA Case}
 
-% =============================
-\section{Experimental Setup}
+A compact synthetic case with three candidate wells was used to validate the QAOA workflow end-to-end. The prototype included:
+\begin{itemize}
+    \item permeability values,
+    \item thickness values,
+    \item pairwise well distance matrix,
+    \item drainage radius,
+    \item radius of investigation,
+    \item well cost,
+    \item oil price,
+    \item discount rate,
+    \item project life.
+\end{itemize}
 
-\begin{table}[h]
-\centering
-\begin{tabular}{ll}
-\toprule
-Parameter & Value \\
-\midrule
-Number of wells & 6, 8, 10 \\
-Runs & 10 \\
-QAOA layers & 2 \\
-Optimizer & COBYLA \\
-\bottomrule
-\end{tabular}
-\caption{Experimental configuration}
-\end{table}
+These variables were passed to the QUBO builder to generate a binary objective function combining reservoir behavior and economic logic.
 
-% =============================
-\section{Results}
+\subsection{QUBO-to-Ising Conversion}
 
-\subsection{Objective Energy}
+The QUBO matrix was transformed into an Ising Hamiltonian composed of one-body \(Z\) terms and two-body \(ZZ\) terms. This allowed the objective function to be evaluated within a QAOA circuit. The resulting Hamiltonian was represented using \texttt{SparsePauliOp}, and the variational parameters were optimized using COBYLA.
 
-All solvers achieve similar objective energy values, indicating consistent optimization performance.
+\subsection{Benchmark Design}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{results_plot.png}
-\caption{Well selection optimization}
-\end{figure}
+To complete the scientific validation, the framework was benchmarked on synthetic candidate well sets of size:
+\[
+N = 6,\;8,\;10
+\]
 
-\subsection{Production}
+For each value of \(N\), multiple random seeds were used. The following methods were compared:
+\begin{itemize}
+    \item Exact optimization,
+    \item QAOA,
+    \item Random search,
+    \item Simulated annealing.
+\end{itemize}
 
-Production results are nearly identical across all methods.
+The recorded metrics were:
+\begin{itemize}
+    \item objective energy,
+    \item production,
+    \item interference penalty,
+    \item runtime.
+\end{itemize}
 
-\subsection{Interference}
+\section{Prototype QAOA Result}
 
-Interference penalties remain consistent across solvers.
+\subsection{Three-Well Decision Extraction}
+
+The QAOA prototype successfully produced a final binary drilling decision. The most representative result obtained from the validated run was:
+\[
+x = [1,1,0]
+\]
+
+This means:
+\begin{itemize}
+    \item Well 0 is selected,
+    \item Well 1 is selected,
+    \item Well 2 is excluded.
+\end{itemize}
+
+In bitstring notation, the dominant sampled state was:
+\[
+011
+\]
+
+after accounting for the bit-order convention used in the implementation.
+
+\subsection{Interpretation}
+
+The above decision indicates that the combination of wells 0 and 1 provides the most favorable objective value under the adopted QUBO formulation. Within this model, the third well does not improve the combined objective sufficiently when production contribution, economic effect, and interference penalty are considered together.
+
+This prototype result confirms that the framework is capable of converting reservoir and economic information into a directly actionable binary field decision.
+
+\section{Results and Discussion}
+
+The benchmark stage extended the study beyond the small prototype and evaluated the framework under multiple candidate well counts. The summary results were exported automatically and converted into LaTeX-ready assets.
+
+\subsection{Benchmark Table}
+
+\input{table1.tex}
+
+Table~\ref{tab:benchmark_comparison} summarizes the average performance of all methods for \(N=6,8,10\). Exact optimization provides the reference optimum for each tested case size. The QAOA implementation remains competitive as a structured hybrid method, while random search serves as a weak baseline and simulated annealing provides a lightweight heuristic comparison.
+
+\subsection{Energy Performance}
+
+The energy metric represents the objective function value being minimized. Lower values indicate better optimization performance. The benchmark trends show that exact optimization achieves the best reference solutions, as expected. QAOA captures meaningful structure in the QUBO landscape, although its performance depends on the variational optimization quality and sampling behavior.
+
+\subsection{Production Behavior}
+
+Production remains an important interpretive metric because it reflects the total value of the selected wells independent of the full objective formulation. The results indicate that methods producing lower objective energy generally correspond to economically and physically better drilling combinations, although the final objective also includes interference penalties.
+
+\subsection{Interference Penalty}
+
+The interference metric quantifies the penalty associated with selecting wells that are too close or too strongly coupled. Lower interference values imply more spatially favorable well configurations. This metric helps explain why some solutions with apparently attractive production are not necessarily optimal overall.
 
 \subsection{Runtime}
 
-QAOA shows higher runtime due to variational optimization overhead.
+Runtime captures computational efficiency. Exact optimization is feasible for the tested candidate counts, but its complexity grows exponentially with problem size. In contrast, the heuristic and hybrid methods are more scalable in principle, even if their solution quality may vary. This supports the role of hybrid quantum-classical workflows as potential future tools for larger search spaces.
 
-% =============================
-\section{Optimality Gap}
+\subsection{Figures}
 
-The gap is defined as:
+\input{figures_block.tex}
 
-\begin{equation}
-\text{Gap} = E_{\text{method}} - E_{\text{optimal}}
-\end{equation}
+Figures~\ref{fig:energy_comparison}--\ref{fig:runtime_comparison} provide a compact visual comparison of the four methods across the tested candidate well counts. Together, they show the trade-off between solution quality, production behavior, interference control, and execution time.
 
-Results show negligible gap for all methods.
+\section{Engineering Interpretation}
 
-% =============================
-\section{Scalability Analysis}
+From an engineering perspective, the project demonstrates that a reservoir well placement problem can be encoded in binary form and solved consistently using both quantum and classical strategies. The final drilling recommendation in the prototype case was not an abstract quantum output; it was a direct field decision expressed as a binary vector.
 
-\subsection{Exact Solver}
+This is important because it bridges the gap between:
+\begin{itemize}
+    \item reservoir engineering intuition,
+    \item economic interpretation,
+    \item binary optimization formulation,
+    \item and quantum algorithm execution.
+\end{itemize}
 
-\begin{equation}
-O(2^n)
-\end{equation}
+The framework therefore has value not only as a computational experiment, but also as a conceptual decision-support structure for future reservoir planning studies.
 
-\subsection{Simulated Annealing}
-
-\begin{equation}
-O(n \cdot k)
-\end{equation}
-
-\subsection{QAOA}
-
-\begin{equation}
-O(p \cdot C_{\text{circuit}})
-\end{equation}
-
-Exact methods become infeasible for large $n$, while QAOA remains scalable.
-
-% =============================
-\section{Discussion}
-
-QAOA achieves comparable solution quality but at higher computational cost. No quantum advantage is observed for small-scale problems, but scalability suggests potential for larger systems.
-
-% =============================
 \section{Conclusion}
 
-A hybrid quantum-classical framework for well placement optimization was developed. QAOA matches classical methods in solution quality, with scalability advantages for future large-scale applications.
+This study presented a scalable hybrid quantum-classical framework for oil reservoir optimization via QUBO modeling and QAOA. The implemented workflow achieved the following:
+\begin{itemize}
+    \item construction of a binary optimization model integrating production and interference effects,
+    \item successful extraction of a prototype well-selection decision using QAOA,
+    \item benchmarking against exact optimization, random search, and simulated annealing for candidate well counts of 6, 8, and 10,
+    \item automatic export of research-ready tables and figures.
+\end{itemize}
 
-Future work includes real reservoir data and quantum hardware implementation.
+For the prototype three-well case, the framework selected wells 0 and 1 while excluding well 2. For the broader benchmark experiments, the framework generated consistent comparative results across multiple methods and metrics, thereby completing the minimum validation required for a research-oriented study.
 
-% =============================
-\section*{Acknowledgment}
+The present work is best viewed as a complete prototype framework rather than a final field-scale solution. Nevertheless, it establishes a reproducible base for future studies involving:
+\begin{itemize}
+    \item larger candidate well sets,
+    \item richer reservoir physics,
+    \item more detailed economic models,
+    \item and real reservoir datasets.
+\end{itemize}
 
-The author acknowledges the Ministry of Oil — Iraq for support.
+\section*{Generated Project Outputs}
 
-% =============================
+The project generated the following key outputs:
+\begin{itemize}
+    \item \texttt{results/qaoa\_final\_result.csv}
+    \item \texttt{results/qaoa\_engineering\_summary.txt}
+    \item \texttt{results/comparison\_results.csv}
+    \item \texttt{results/comparison\_summary.csv}
+    \item \texttt{table1.tex}
+    \item \texttt{figures\_block.tex}
+\end{itemize}
+
+These outputs make the project directly reusable for reporting, reproducibility, and LaTeX-based manuscript preparation.
+
 \end{document}

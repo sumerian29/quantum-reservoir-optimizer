@@ -1,0 +1,18 @@
+Quantum Reservoir Optimizer - Final Engineering Summary
+=====================================================
+
+Optimal Energy from optimizer: -333225594960.892090
+Optimal Angles (gamma, beta): [2.2042353150371405, 2.130127276374871, 2.551500721210954, 0.09284829627630378]
+Best Bitstring: 011
+Binary Decision (0/1): [1, 1, 0]
+Selected Wells: [0, 1]
+QUBO Value of Selected Solution: -719306732547.715820
+
+Metadata Keys: ['P', 'I', 'revenue_npv', 'well_cost', 'oil_price', 'discount_rate', 'project_life']
+
+Top Measurement Counts:
+011 : 1257
+000 : 978
+111 : 552
+100 : 444
+010 : 401
