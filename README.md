@@ -44,3 +44,12 @@ This work introduces a new paradigm for:
 ```bash
 python run_qaoa.py
 python comparison.py
+## 👤 Author
+## 👤 Author
+
+**Tareq Mageed**
+
+
+Petroleum Engineer – Ministry of Oil, Iraq  
+GitHub: https://github.com/sumerian29  
+[LinkedIn: https://linkedin.com/in/your-profile](https://www.linkedin.com/in/tariq-al-kraimy-5b5301a2/)
