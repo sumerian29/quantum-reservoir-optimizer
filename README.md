@@ -41,10 +41,9 @@ This work introduces a new paradigm for:
 
 ## 🚀 How to Run
 
-```bash
 python run_qaoa.py
 python comparison.py
-## 👤 Author
+python generate_latex_table.py
 ## 👤 Author
 
 **Tareq Mageed**
