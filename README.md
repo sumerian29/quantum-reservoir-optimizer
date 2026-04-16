@@ -89,6 +89,23 @@ The framework produces:
 * Comparison between quantum and classical solutions
 * Performance metrics and runtime analysis
 
+  ## 📈 Benchmark Figures
+
+The repository includes benchmark visualizations comparing the proposed hybrid quantum–classical framework against classical methods.
+
+### Objective Energy Comparison
+![Objective Energy Comparison](./energy_comparison.png)
+
+### Production Comparison
+![Production Comparison](./production_comparison.png)
+
+### Interference Comparison
+![Interference Comparison](./interference_comparison.png)
+
+### Runtime Comparison
+![Runtime Comparison](./runtime_comparison.png)
+
+
 ### Example Outputs:
 
 * `results/qaoa_final_result.csv`
