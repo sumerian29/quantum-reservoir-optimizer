@@ -1,18 +1,29 @@
-Quantum Reservoir Optimizer - Final Engineering Summary
-=====================================================
+QAOA Engineering Summary
+========================================
+Source: Volve-inspired field dataset
+Number of wells: 5
+Well names: ['A1', 'A2', 'A3', 'A4', 'A5']
 
-Optimal Energy from optimizer: -333225594960.892090
-Optimal Angles (gamma, beta): [2.2042353150371405, 2.130127276374871, 2.551500721210954, 0.09284829627630378]
-Best Bitstring: 011
-Binary Decision (0/1): [1, 1, 0]
-Selected Wells: [0, 1]
-QUBO Value of Selected Solution: -719306732547.715820
+Best bitstring from QAOA state: 10110
+Binary decision (0/1): [1, 0, 1, 1, 0]
+Selected wells: ['A1', 'A3', 'A4']
+QAOA energy: 1.429235
+QUBO value of selected solution: 1.136688
 
-Metadata Keys: ['P', 'I', 'revenue_npv', 'well_cost', 'oil_price', 'discount_rate', 'project_life']
+Best brute-force bitstring: 00100
+Best brute-force QUBO value: -0.900000
 
-Top Measurement Counts:
-011 : 1257
-000 : 978
-111 : 552
-100 : 444
-010 : 401
+Top measurement-like counts:
+  10110: 352
+  11011: 341
+  10111: 307
+  00111: 290
+  01000: 283
+  01100: 274
+  10011: 257
+  11100: 218
+  10101: 180
+  10100: 169
+
+Optimal parameters:
+  3.289488 1.313758 2.888240 2.176119
