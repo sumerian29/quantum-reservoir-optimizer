@@ -1,0 +1,10 @@
+Simulated Annealing Engineering Summary
+==========================================
+Source: Volve-inspired field dataset
+Number of wells: 5
+Well names: ['A1', 'A2', 'A3', 'A4', 'A5']
+
+Best bitstring: 00100
+Binary decision (0/1): [0, 0, 1, 0, 0]
+Selected wells: ['A3']
+Best QUBO value: -0.900000

@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\caption{Comparison of optimization methods across different candidate well counts.}
+\label{tab:benchmark_comparison}
+\begin{tabular}{lcccccc}
+\toprule
+Method & Wells & Energy Mean & Production Mean & Interference Mean & Runtime Mean (s) & Runtime Std \\
+\midrule
+Exact & 6 & -2.1268 & 2.6355 & 0.5088 & 0.000318 & 0.000036 \\
+QAOA & 6 & -2.1017 & 2.5274 & 0.4257 & 0.001485 & 0.000650 \\
+Random & 6 & -2.1268 & 2.6355 & 0.5088 & 0.016422 & 0.003744 \\
+SA & 6 & -2.1268 & 2.6355 & 0.5088 & 0.026119 & 0.005536 \\
+Exact & 8 & -2.2997 & 3.0754 & 0.7757 & 0.001158 & 0.000124 \\
+QAOA & 8 & -2.2602 & 2.8636 & 0.6034 & 0.001220 & 0.000153 \\
+Random & 8 & -2.2997 & 3.0754 & 0.7757 & 0.013499 & 0.001353 \\
+SA & 8 & -2.2997 & 3.0754 & 0.7757 & 0.021754 & 0.001511 \\
+Exact & 10 & -2.7965 & 3.9091 & 1.1126 & 0.004812 & 0.000290 \\
+QAOA & 10 & -2.7329 & 3.7891 & 1.0562 & 0.001198 & 0.000094 \\
+Random & 10 & -2.7803 & 3.8137 & 1.0335 & 0.014538 & 0.001218 \\
+SA & 10 & -2.7965 & 3.9091 & 1.1126 & 0.022949 & 0.001716 \\
+\bottomrule
+\end{tabular}
+\end{table}
