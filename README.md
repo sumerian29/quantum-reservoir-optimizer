@@ -1,5 +1,4 @@
-# Quantum–Classical Oil Reservoir Optimization
-
+# Scalable Hybrid Quantum–Classical Optimization for Oil Reservoir Well Placement (QUBO + QAOA)
 This project presents a hybrid quantum–classical framework for optimizing oil well placement using QUBO modeling and QAOA.
 
 ## 🔍 Overview
