@@ -1,0 +1,5 @@
+QAOA successfully recovered the global optimum on the 4-well validation benchmark.
+Best sampled bitstring: 0111
+Energy: -1.702511
+Approximation ratio: 1.000000
+Selected wells: [np.int64(0), np.int64(1), np.int64(2)]

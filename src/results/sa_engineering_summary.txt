@@ -1,0 +1,4 @@
+Simulated annealing recovered the same optimum as brute force on the 4-well benchmark.
+Energy: -1.702511
+Approximation ratio: 1.000000
+Selected wells: [np.int64(0), np.int64(1), np.int64(2)]
