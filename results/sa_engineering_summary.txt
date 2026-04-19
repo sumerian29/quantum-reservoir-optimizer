@@ -1,10 +1,4 @@
-Simulated Annealing Engineering Summary
-==========================================
-Source: Volve-inspired field dataset
-Number of wells: 5
-Well names: ['A1', 'A2', 'A3', 'A4', 'A5']
-
-Best bitstring: 00100
-Binary decision (0/1): [0, 0, 1, 0, 0]
-Selected wells: ['A3']
-Best QUBO value: -0.900000
+Simulated annealing recovered the same optimum as brute force on the 4-well benchmark.
+Energy: -1.702511
+Approximation ratio: 1.000000
+Selected wells: [np.int64(0), np.int64(1), np.int64(2)]

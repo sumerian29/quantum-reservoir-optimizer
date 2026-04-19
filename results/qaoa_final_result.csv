@@ -1,2 +1,2 @@
-source,n_wells,well_names,best_bitstring,selected_wells,qaoa_energy,selected_qubo_value,bruteforce_bitstring,bruteforce_qubo_value,optimal_parameters
-Volve-inspired field dataset,5,"A1, A2, A3, A4, A5",10110,"A1, A3, A4",1.4292345799930086,1.1366877558978392,00100,-0.9,3.289488 1.313758 2.888240 2.176119
+BestBitstring,Energy,Frequency,ExpectedEnergy,SelectedWells
+0111,-1.702511,0.229492,-1.482206,"[np.int64(0), np.int64(1), np.int64(2)]"

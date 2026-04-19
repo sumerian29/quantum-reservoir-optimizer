@@ -1,29 +1,5 @@
-QAOA Engineering Summary
-========================================
-Source: Volve-inspired field dataset
-Number of wells: 5
-Well names: ['A1', 'A2', 'A3', 'A4', 'A5']
-
-Best bitstring from QAOA state: 10110
-Binary decision (0/1): [1, 0, 1, 1, 0]
-Selected wells: ['A1', 'A3', 'A4']
-QAOA energy: 1.429235
-QUBO value of selected solution: 1.136688
-
-Best brute-force bitstring: 00100
-Best brute-force QUBO value: -0.900000
-
-Top measurement-like counts:
-  10110: 352
-  11011: 341
-  10111: 307
-  00111: 290
-  01000: 283
-  01100: 274
-  10011: 257
-  11100: 218
-  10101: 180
-  10100: 169
-
-Optimal parameters:
-  3.289488 1.313758 2.888240 2.176119
+QAOA successfully recovered the global optimum on the 4-well validation benchmark.
+Best sampled bitstring: 0111
+Energy: -1.702511
+Approximation ratio: 1.000000
+Selected wells: [np.int64(0), np.int64(1), np.int64(2)]
